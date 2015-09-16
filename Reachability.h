@@ -77,7 +77,7 @@ typedef void (^NetworkReachabilityChanged)(Reachability *reachability, SCNetwork
 +(instancetype)reachabilityWithAddress:(void *)hostAddress;
 +(instancetype)reachabilityForLocalWiFi;
 
--(instancetype)initWithReachabilityRef:(SCNetworkReachabilityRef)ref;
+-(instancetype)initWithReachabilityRef:(SCNetworkReachabilityRef) CF_CONSUMED ref;
 
 -(BOOL)startNotifier;
 -(void)stopNotifier;

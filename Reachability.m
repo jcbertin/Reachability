@@ -150,13 +150,13 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 
 // Initialization methods
 
--(instancetype)initWithReachabilityRef:(SCNetworkReachabilityRef)ref
+-(instancetype)initWithReachabilityRef:(SCNetworkReachabilityRef) CF_CONSUMED ref
 {
     self = [super init];
     if (self != nil) 
     {
-        self.reachableOnWWAN = YES;
-        self.reachabilityRef = ref;
+        _reachableOnWWAN = YES;
+        _reachabilityRef = ref;
 
         // We need to create a serial queue.
         // We allocate this once for the lifetime of the notifier.
@@ -166,7 +166,8 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 #else
         self.reachabilitySerialQueue = dispatch_queue_create("com.tonymillion.reachability", NULL);
 #endif
-    }
+    } else
+        CFRelease(ref);
     
     return self;    
 }
